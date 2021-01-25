@@ -1,0 +1,3 @@
+A small DragNDrop project based in Typescript.
+Our point objective is to understand typescript through a 
+project and to figure it out how we can work it.
