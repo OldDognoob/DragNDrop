@@ -17,61 +17,77 @@
 // content it gives the references to the property
 // the insertAdjacentElement it is a method provided by javascript, it takes the afterbegin and importNode
 // which in order to be add, we need to get access by adding it as an element
-
-import { textChangeRangeIsUnchanged } from "typescript";
-
 /*-------------Interacting with the Element------------- */
 // we will try to have access inside the form , inside the inputs elements
 // to get access in that element we need to add some properties in this class
 // so we adding more fields up there
 
-class ProjectInput {
-  templateElement: HTMLTemplateElement;
-  hostElement: HTMLDivElement;
-  element: HTMLFormElement;
-  titleInputElement: HTMLInputElement;
-  descriptionInputElement: HTMLInputElement;
-  peopleInputElement: HTMLInputElement;
-
-  constructor() {
-    this.templateElement = document.getElementById(
-      "project-input"
-    )! as HTMLTemplateElement;
-    this.hostElement = document.getElementById("app")! as HTMLDivElement;
-
-    const importedNode = document.importNode(
-      this.templateElement.content,
-      true
-    );
-    this.element = importedNode.firstElementChild as HTMLFormElement;
-    this.element.id = "user-input";
-
-    this.titleInputElement = this.element.querySelector(
-      "#title"
-    ) as HTMLInputElement;
-    this.descriptionInputElement = this.element.querySelector(
-      "#description"
-    ) as HTMLInputElement;
-    this.peopleInputElement = this.element.querySelector(
-      "#people"
-    ) as HTMLInputElement;
-
-    this.configure();
-    this.attach();
+// autobind decorator
+function autobind(
+    _: any,
+    _2: string,
+    descriptor: PropertyDescriptor
+  ) {
+    const originalMethod = descriptor.value;
+    const adjDescriptor: PropertyDescriptor = {
+      configurable: true,
+      get() {
+        const boundFn = originalMethod.bind(this);
+        return boundFn;
+      }
+    };
+    return adjDescriptor;
   }
-
-  private submitHandler(event: Event) {
-    event.preventDefault();
-    console.log(this.titleInputElement.value);
+  
+  // ProjectInput Class
+  class ProjectInput {
+    templateElement: HTMLTemplateElement;
+    hostElement: HTMLDivElement;
+    element: HTMLFormElement;
+    titleInputElement: HTMLInputElement;
+    descriptionInputElement: HTMLInputElement;
+    peopleInputElement: HTMLInputElement;
+  
+    constructor() {
+      this.templateElement = document.getElementById(
+        'project-input'
+      )! as HTMLTemplateElement;
+      this.hostElement = document.getElementById('app')! as HTMLDivElement;
+  
+      const importedNode = document.importNode(
+        this.templateElement.content,
+        true
+      );
+      this.element = importedNode.firstElementChild as HTMLFormElement;
+      this.element.id = 'user-input';
+  
+      this.titleInputElement = this.element.querySelector(
+        '#title'
+      ) as HTMLInputElement;
+      this.descriptionInputElement = this.element.querySelector(
+        '#description'
+      ) as HTMLInputElement;
+      this.peopleInputElement = this.element.querySelector(
+        '#people'
+      ) as HTMLInputElement;
+  
+      this.configure();
+      this.attach();
+    }
+  
+    @autobind
+    private submitHandler(event: Event) {
+      event.preventDefault();
+      console.log(this.titleInputElement.value);
+    }
+  
+    private configure() {
+      this.element.addEventListener('submit', this.submitHandler);
+    }
+  
+    private attach() {
+      this.hostElement.insertAdjacentElement('afterbegin', this.element);
+    }
   }
-
-  private configure() {
-    this.element.addEventListener("submit", this.submitHandler.bind(this));
-  }
-
-  private attach() {
-    this.hostElement.insertAdjacentElement("afterbegin", this.element);
-  }
-}
-
-const prjInput = new ProjectInput();
+  
+  const prjInput = new ProjectInput();
