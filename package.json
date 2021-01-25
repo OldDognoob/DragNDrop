@@ -5,15 +5,16 @@
   "dependencies": {
     "typescript": "^4.1.3"
   },
-  "devDependencies": {},
+  "devDependencies": {"lite-server": "^2.6.1"},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OldDognoob/DragNDrop.git"
   },
-  "author": "",
+  "author": "Dimos Christidis",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/OldDognoob/DragNDrop/issues"
