@@ -22,33 +22,24 @@
 // to get access in that element we need to add some properties in this class
 // so we adding more fields up there
 
-// Drag & Drop Interfaces
-interface Draggable {
-  dragStartHandler(event: DragEvent): void;
-  dragEndHandler(event: DragEvent): void;
+///<reference path="drag-drop-interfaces.ts"/>
+///<reference path="project-model.ts"/>
+
+namespace App{
+  export interface Draggable {
+    dragStartHandler(event: DragEvent): void;
+    dragEndHandler(event: DragEvent): void;
+  }
+  export interface DragTarget {
+    dragOverHandler(event: DragEvent): void;
+    dropHandler(event: DragEvent): void;
+    dragLeaveHandler(event: DragEvent): void;
+  }
 }
 
-interface DragTarget {
-  dragOverHandler(event: DragEvent): void;
-  dropHandler(event: DragEvent): void;
-  dragLeaveHandler(event: DragEvent): void;
-}
-
+namespace App{
 // Project Type
-enum ProjectStatus {
-  Active,
-  Finished
-}
 
-class Project {
-  constructor(
-    public id: string,
-    public title: string,
-    public description: string,
-    public people: number,
-    public status: ProjectStatus
-  ) {}
-}
 
 // Project State Management
 type Listener<T> = (items: T[]) => void;
@@ -394,7 +385,8 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
     }
   }
 }
+new ProjectInput();
+new ProjectList('active');
+new ProjectList('finished');
+}
 
-const prjInput = new ProjectInput();
-const activePrjList = new ProjectList('active');
-const finishedPrjList = new ProjectList('finished');
