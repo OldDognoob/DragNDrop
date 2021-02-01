@@ -22,11 +22,11 @@
 // to get access in that element we need to add some properties in this class
 // so we adding more fields up there
 
-///<reference path="drag-drop-interfaces.ts"/>
-///<reference path="project-model.ts"/>
-///<reference path="project-state-management.ts"/>
-///<reference path="validation.ts"/>
-///<reference path="autobind-decorator.ts"/>
+///<reference path="models/drag-drop.ts"/>
+///<reference path="models/project.ts"/>
+///<reference path="state/project-state.ts"/>
+///<reference path="util/validation.ts"/>
+///<reference path="decorators/autobind.ts"/>
 
 namespace App{
 
