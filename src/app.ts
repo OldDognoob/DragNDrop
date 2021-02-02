@@ -23,8 +23,8 @@
 // to get access in that element we need to add some properties in this class
 // so we adding more fields up there
 
-import { ProjectInput } from './components/project-input.js';
-import { ProjectList } from './components/project-list.js';
+import { ProjectInput } from './components/project-input';
+import { ProjectList } from './components/project-list';
 
 new ProjectInput();
 new ProjectList('active');
